@@ -16,7 +16,9 @@ weight on that loss held outside the adaptive balancer, and a
     oracle/    reference solver and the curves it generates
     pinn/      network, losses, training and figure scripts
     pinn/runs/ trained checkpoints for the reported results
-    figures/   figures as published
+
+Figures are not stored; the scripts in `pinn/` regenerate them into a
+`figures/` directory from the data and checkpoints here.
 
 ## Reference solver
 
