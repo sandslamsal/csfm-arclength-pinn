@@ -20,14 +20,16 @@ OFFSETS = [3, 11, 23]          # SEED+3 is the arm's original offset
 def run_arm(mod_name, offset):
     import torch
     import pinn_arclength as base
-    mod = importlib.import_module(mod_name)
-    importlib.reload(mod)
-    # patch the generator seeds by wrapping manual_seed at module level:
-    # both arm scripts derive every generator from SEED + 3, so shifting
-    # base.SEED shifts the whole run coherently.
+    # Set the seed BEFORE (re)loading the arm module: both arms bind
+    # SEED by from-import at module top level, so the reload is what
+    # propagates the changed value. The first sweep set it after the
+    # reload, and the no-physics arm (fully deterministic) returned
+    # identical numbers at every "seed", which is how the flaw showed.
     old = base.SEED
     base.SEED = old + (offset - 3)
     try:
+        mod = importlib.import_module(mod_name)
+        importlib.reload(mod)
         mod.main()
     finally:
         base.SEED = old
@@ -59,9 +61,9 @@ def main():
             print(f"[{arm} +{off}] 5%: {errs['0.05']:+.2f}  25%: {errs['0.25']:+.2f}  "
                   f"({rows[-1]['wall_s']:.0f}s)", flush=True)
             json.dump(results | {arm: rows},
-                      open(HERE / 'runs' / 'm4_seed_sweep.json', 'w'), indent=1)
+                      open(HERE / 'runs' / 'm4_seed_sweep_v2.json', 'w'), indent=1)
         results[arm] = rows
-    json.dump(results, open(HERE / 'runs' / 'm4_seed_sweep.json', 'w'), indent=1)
+    json.dump(results, open(HERE / 'runs' / 'm4_seed_sweep_v2.json', 'w'), indent=1)
     for arm, rows in results.items():
         ms = [r['mean_abs'] for r in rows]
         print(f"{arm}: mean|err| per seed {['%.2f' % m for m in ms]}  "
