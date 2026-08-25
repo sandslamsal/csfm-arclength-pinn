@@ -240,7 +240,10 @@ def deepbeam_cfg() -> tuple[FineTuneConfig, str]:
         prob=DeepBeam(),
         warmstart_ckpt=here / "runs" / "arclength_pinn_latest.pt",
         out_dir=here / "runs" / "deepbeam_anchor",
-        target=CSFMCurveTarget.from_deepbeam_oracle(),
+        # the equilibrium-converged target. The secant-era
+        # from_deepbeam_oracle() is retired: anchoring to it reproduces
+        # the withdrawn 2.29-peak curve faithfully at any anchor weight.
+        target=CSFMCurveTarget.from_deepbeam_newton(),
         alpha=1.0, S_max_mm=10.0, lr=2e-4, n_iter=2500,
         grad_clip=1.0,
         probe_xy=None,

@@ -39,7 +39,10 @@ from csfm_constitutive import CsfmMaterial                                  # no
 class WallPierVK1:
     L: float = 1500.0
     H: float = 3700.0
-    t: float = 200.0
+    t: float = 350.0               # Bimschas (2010) Tab. 5.1. A 200 mm
+                                   # value gives 57 % of the section and
+                                   # 57 % of the flexural steel, and must
+                                   # match the oracle's VK1Problem.
     h_eff: float = 3300.0
     bearing_V: float = 200.0       # half-height of the V-load patch (mm)
     bearing_N_half: float = 200.0  # half-width of the centred N plate (mm)

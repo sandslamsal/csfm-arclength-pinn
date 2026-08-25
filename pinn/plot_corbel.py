@@ -183,23 +183,92 @@ def draw_corbel_overlay(ax):
     ax.plot(delta_p[i_peak], lam_p[i_peak], "*", color=F.SKY, ms=11,
             mec="white", mew=0.6, zorder=6)
 
-    F.note(ax, 0.03, 0.97,
-           rf"PINN peak $\lambda = {lam_p[i_peak]:.2f}$"
-           rf" at $\delta = {delta_p[i_peak]:.1f}$ mm" + "\n"
-           rf"reference there: {csfm_at_pinn_peak:.2f}"
-           rf" ({in_window_err:+.1f} %)",
-           ha="left", va="top", color="0.35")
+    ax.text(0.030, 0.985,
+            rf"PINN peak $\lambda = {lam_p[i_peak]:.2f}$"
+            rf" at $\delta = {delta_p[i_peak]:.1f}$ mm" + "\n"
+            rf"reference there: {csfm_at_pinn_peak:.2f}"
+            rf" ({in_window_err:+.1f} %)" + "\n"
+            rf"reference peak {pk['lam']:.2f} at {pk['delta']:.1f} mm" + "\n"
+            rf"steep branch: $\leq 0.30$ mm apart in $\delta$",
+            transform=ax.transAxes, ha="left", va="top",
+            fontsize=F.FS_ANNOT, color="0.32", linespacing=1.35,
+            bbox=dict(boxstyle="round,pad=0.32", fc="white", ec="0.85",
+                      lw=0.6), zorder=8)
+
+    # Beyond the reference's converged range the comparison has nothing
+    # to compare against, so the panel says so rather than leaving the
+    # PINN trace to run on alone.
+    d_end = float(ref_delta.max())
+    ax.axvspan(d_end, max(delta_p.max(), ref_delta.max()) * 1.02,
+               color="0.93", lw=0, zorder=0)
+    ax.text(d_end + 0.72, 0.675, "reference ends",
+            transform=ax.get_xaxis_transform(), fontsize=F.FS_SMALL,
+            color="0.5", ha="center", va="bottom", rotation=90)
 
     ax.set_ylabel(r"load factor $\lambda$")
     ax.set_xlim(0, max(delta_p.max(), ref_delta.max()) * 1.02)
-    ax.set_ylim(0, max(lam_p.max(), ref_lam.max()) * 1.15)
+    ax.set_ylim(0, max(lam_p.max(), ref_lam.max()) * 1.34)
     F.clean(ax)
-    ax.legend(loc="lower right", fontsize=F.FS_ANNOT)
+    ax.legend(loc="lower right", fontsize=F.FS_ANNOT, frameon=False,
+              handlelength=1.9, labelspacing=0.30, borderaxespad=0.4)
+
+    # Inset: the trace against the reference in per cent. At full scale
+    # the two curves lie within a stroke width of each other over most
+    # of the window, so the overlay alone cannot show where they part.
+    axi = ax.inset_axes([0.455, 0.335, 0.510, 0.300])
+    m = (delta_p >= float(ref_delta.min())) & (delta_p <= d_end)
+    dev = (lam_p[m] / np.interp(delta_p[m], ref_delta, ref_env) - 1) * 100.0
+    axi.axhspan(-5, 5, color="0.88", lw=0, zorder=0)
+    axi.axhline(0, color="0.45", lw=0.8, zorder=1)
+    axi.plot(delta_p[m], dev, color=F.SKY, lw=1.6, zorder=3)
+    axi.set_xlim(0, d_end)
+    axi.set_ylim(-8, 8)
+    axi.set_yticks([-5, 0, 5])
+    axi.set_xticks([0, 2, 4, 6, 8])
+    axi.tick_params(labelsize=F.FS_SMALL, length=2.2, pad=1.5)
+    for sp in ("top", "right"):
+        axi.spines[sp].set_visible(False)
+    for sp in ("left", "bottom"):
+        axi.spines[sp].set_linewidth(0.7)
+    axi.text(0.97, 0.97, "PINN minus reference  (%)",
+             transform=axi.transAxes, fontsize=F.FS_SMALL, color="0.35",
+             ha="right", va="top")
+    # Below about 1 mm the branch is near-vertical, so a difference read
+    # off at fixed deflection is dominated by a horizontal offset and
+    # leaves the frame. The offset itself is the meaningful measure
+    # there, and it is quoted rather than plotted.
+    axi.annotate("", xy=(0.055, 1.02), xytext=(0.055, 0.86),
+                 xycoords="axes fraction", textcoords="axes fraction",
+                 arrowprops=dict(arrowstyle="-|>", color=F.SKY, lw=1.2))
+
+    axi.set_facecolor("white")
+    axi.patch.set_alpha(1.0)
+    axi.set_zorder(6)
+
+    # The numbers the text quotes, written from the same arrays the
+    # figure is drawn from, so the two cannot drift apart. The path
+    # error is a root-mean-square in lambda, sampled on the network's
+    # own trace over the reference's converged span.
+    m_all = (delta_p >= float(ref_delta.min())) & (delta_p <= d_end)
+    rms = float(np.sqrt(np.mean(
+        (lam_p[m_all] - np.interp(delta_p[m_all], ref_delta, ref_env)) ** 2)))
+    json.dump({"pinn_peak_lam": float(lam_p[i_peak]),
+               "pinn_peak_delta": float(delta_p[i_peak]),
+               "ref_at_pinn_peak": csfm_at_pinn_peak,
+               "err_at_pinn_peak_pct": in_window_err,
+               "ref_peak_lam": float(pk["lam"]),
+               "ref_peak_delta": float(pk["delta"]),
+               "err_vs_ref_peak_pct":
+                   (float(lam_p[i_peak]) / float(pk["lam"]) - 1) * 100.0,
+               "path_rmse": rms,
+               "path_rmse_pct_of_peak": rms / float(pk["lam"]) * 100.0},
+              open(HERE.parent / "oracle" / "corbel_comparison.json", "w"),
+              indent=1)
     return delta_p, lam_p, ref_delta, ref_env
 
 
 def fig_corbel_combined():
-    fig = plt.figure(figsize=(F.FIG_W, 3.2))
+    fig = plt.figure(figsize=(F.FIG_W, 3.7))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.42, 1.05], wspace=0.30)
     ax_g = fig.add_subplot(gs[0])
     ax_c = fig.add_subplot(gs[1])
@@ -213,9 +282,25 @@ def fig_corbel_combined():
     fig.tight_layout(rect=(0, 0, 1, 0.93))
     fig.canvas.draw()
     bb_c = ax_c.get_position()
-    F.fit_schematic(fig, ax_g, bb_c.y0, bb_c.y1)
+    F.fit_schematic(fig, ax_g, bb_c.y0 + 0.185, bb_c.y1, x0=0.030)
+    # The schematic's width follows its aspect, so the gap to the data
+    # panel is whatever is left over. Set it instead of accepting it.
+    GAP = 0.115
+    ga = ax_g.get_position()
+    x_new = ga.x0 + ga.width + GAP
+    q = ax_c.get_position()
+    ax_c.set_position((x_new, q.y0, q.x1 - x_new, q.height))
+    fig.canvas.draw()
     F.fig_panel(fig, ax_g, 'a', 'the corbel and its load path')
     F.fig_panel(fig, ax_c, 'b', 'anchored trace vs reference')
+    gb = ax_g.get_position()
+    fig.text(gb.x0 + gb.width / 2, gb.y0 - 0.045,
+             "section $500 \\times 400 \\times 300$ mm,  "
+             "$f_c = 30$ MPa,  $f_y = 500$ MPa\n"
+             "top tie band $\\rho_x = 1.2$ % over 80 mm,  "
+             "stirrups $\\rho_y = 0.25$ %",
+             fontsize=F.FS_SMALL, color="0.30", ha="center", va="top",
+             linespacing=1.5)
     out = FIGDIR / "corbel_combined.png"
     F.save(fig, out)
     plt.close(fig)

@@ -2,7 +2,9 @@
 
 The secant-Picard corbel reference (corbel_reference.json) peaks at
 lambda = 3.078 at 14.62 mm. On the deep beam the same solver overstated the
-intact capacity by 66 per cent and the peak deflection by 89 per cent because
+intact capacity by 66 per cent, placing the peak at roughly twice the
+deflection (the reference peak is flat to 1 per cent over 3.0 to 4.75 mm,
+so no sharp ratio is quotable), because
 it converges to the fixed point of a clipped secant map rather than to
 equilibrium. This driver traces the corbel on newton_displacement_control,
 same problem, same mesh, same 15 mm window, so the two curves differ in the

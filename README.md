@@ -74,3 +74,21 @@ the source above.
 
 Lamsal, S. An arc-length physics-informed neural network for post-peak
 equilibrium paths, with application to concrete D-regions.
+
+## Corrected references (August 2026)
+
+Two defects in the original reference generation were found and fixed,
+and every affected result was regenerated:
+
+1. **Wall-pier section.** The Bimschas (2010) test units are
+   1500 x 350 mm; an earlier 200 mm thickness gave 57% of the section.
+   `arclength_oracle_vk1.py` and `pinn/wallpier_vk1.py` both carry
+   350 mm, and the two definitions are asserted equal in training.
+2. **Newton iteration cap.** The default cap of 120 truncated the
+   cracked stages of several traces and displaced apparent peaks; the
+   default is now 400 and every stored curve was regenerated under it.
+   Stored curves carry per-state `converged` flags and residuals, and
+   peaks are taken over converged states only.
+
+`requirements.txt` pins the environment used for every stored result
+(python 3.12, single CPU core, no GPU).

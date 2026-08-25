@@ -424,7 +424,7 @@ def assemble_vk1_tangent(u: np.ndarray, prob: VK1Problem, mesh: VK1Mesh
 def newton_displacement_control_vk1(
     prob: VK1Problem, mesh: VK1Mesh,
     delta_max: float = 50.0, n_steps: int = 50,
-    newton_tol_rel: float = 5e-4, newton_max_iter: int = 120,
+    newton_tol_rel: float = 5e-4, newton_max_iter: int = 400,
     lm_tries: int = 25, soften: bool = True, verbose: bool = False,
 ):
     """Displacement-controlled trace converged on the TRUE force residual.

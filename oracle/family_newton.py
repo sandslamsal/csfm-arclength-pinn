@@ -10,7 +10,8 @@ The secant-Picard family reported the opposite -- capacity flat to within
 2.7 per cent across 0 to 30 per cent loss -- and that solver is now known to
 converge to the fixed point of a clipped secant map rather than to
 equilibrium, overstating the intact capacity by 66 per cent and the deflection
-at peak by 89 per cent.
+at peak by roughly a factor of two (no sharp ratio is quotable: the
+reference is flat to 1 per cent over 3.0 to 4.75 mm).
 
 Prediction, with its test: capacity at 30 per cent tie loss should fall by
 roughly 25 to 35 per cent. Under 5 per cent would mean the insensitivity
@@ -51,7 +52,9 @@ dpk = np.array([out['%.2f'%l]['delta_peak'] for l in LEVELS])
 print()
 print('across 0 to %.0f %% tie section loss, equilibrium-converged:'%(LEVELS[-1]*100))
 print('   capacity        %+.1f %%   (secant-Picard family said -1.6 %%)'%((cap[-1]/cap[0]-1)*100))
-print('   deflection peak %+.1f %%   (secant-Picard family said +32.4 %%)'%((dpk[-1]/dpk[0]-1)*100))
+print('   deflection peak %+.1f %%   (diagnostic only: the peaks sit on '
+      '1 %%-flat plateaus, so this ratio is not quotable; the secant '
+      'family said +32.4 %%)'%((dpk[-1]/dpk[0]-1)*100))
 print()
 print('   capacity loss / tie loss = %.2f   (measured on deep beams: 0.66 to 0.94)'
       %(-(cap[-1]/cap[0]-1)/LEVELS[-1]))

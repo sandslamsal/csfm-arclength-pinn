@@ -141,7 +141,7 @@ class DCPoint:
 def newton_displacement_control(
         prob: Problem, mesh: Mesh,
         delta_max: float = 10.0, n_steps: int = 40,
-        newton_tol_rel: float = 5e-4, newton_max_iter: int = 120,
+        newton_tol_rel: float = 5e-4, newton_max_iter: int = 400,
         lm_tries: int = 25, verbose: bool = True) -> list[DCPoint]:
     """Levenberg-Marquardt-damped consistent-tangent Newton under
     DISPLACEMENT control, mirroring the secant-Picard reference's control

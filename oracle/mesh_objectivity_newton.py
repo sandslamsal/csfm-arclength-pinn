@@ -90,7 +90,9 @@ def main() -> None:
         t0 = time.time()
         pts = newton_displacement_control(prob, mesh, delta_max=DELTA_MAX,
                                           n_steps=N_STEPS,
-                                          newton_tol_rel=tol, verbose=False)
+                                          newton_tol_rel=tol,
+                                          newton_max_iter=400,
+                                          verbose=False)
         d = np.array([p.delta for p in pts])
         l = np.array([p.lam for p in pts])
         r = np.array([p.resid for p in pts])

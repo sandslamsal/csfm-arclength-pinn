@@ -144,17 +144,28 @@ def fig_equilibrium_path():
             **F.style('crackband', marker='none', label=False), lw=1.8,
             label='consistent-tangent follower (independent)')
 
-    # the un-anchored network
-    ax.plot(delta, lam, **F.style('pinn', marker='none', label=False),
-            lw=2.6, label='arc-length PINN, un-anchored')
-    ax.plot(delta[i_peak], lam[i_peak], "*", color=F.GREEN, ms=11,
-            mec="white", mew=0.6, zorder=6)
+    # The un-anchored network: drawn subdued and annotated as
+    # inadmissible ON the curve, so a skimming reader cannot take its
+    # level for the result. The fold mechanism, not the level, is the
+    # claim.
+    ax.plot(delta, lam, color=F.GREEN, ls=(0, (4, 2)), lw=1.8,
+            alpha=0.55, label='arc-length PINN, un-anchored')
+    ax.plot(delta[i_peak], lam[i_peak], "*", color=F.GREEN, ms=10,
+            mec="white", mew=0.6, zorder=6, alpha=0.75)
+    k_ann = int(0.62 * len(delta))
+    ax.annotate("inadmissible: violates the traction-free\n"
+                "boundary (Sec. 6); the claim is the fold, not the level",
+                xy=(delta[k_ann], lam[k_ann]),
+                xytext=(delta[k_ann] + 0.3, lam[k_ann] - 0.72),
+                fontsize=F.FS_ANNOT, color="0.35",
+                arrowprops=dict(arrowstyle="-", color="0.5", lw=0.8))
 
     # the closed-form admissibility bound
-    LAM_BOUND = 1.48
-    ax.axhline(LAM_BOUND, color='0.45', lw=0.9, ls='--', alpha=0.9, zorder=2)
-    ax.text(delta.max() * 0.99, LAM_BOUND * 1.02,
-            r"closed-form bound, tie at yield  $\lambda = 1.48$",
+    for lb, txt in ((1.35, r"tie at yield  $\lambda = 1.35$"),
+                    (1.48, r"tie at ultimate  $\lambda = 1.48$")):
+        ax.axhline(lb, color='0.45', lw=0.9, ls='--', alpha=0.9, zorder=2)
+    ax.text(delta.max() * 0.99, 1.48 * 1.02,
+            r"closed-form bounds: tie at yield $1.35$, at ultimate $1.48$",
             ha='right', va='bottom', fontsize=F.FS_ANNOT, color='0.45')
 
     # placed right of the elastic warm-start line, which is steep and

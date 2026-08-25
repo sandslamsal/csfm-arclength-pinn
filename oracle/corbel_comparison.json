@@ -1,0 +1,11 @@
+{
+ "pinn_peak_lam": 1.7760473489761353,
+ "pinn_peak_delta": 2.788808822631836,
+ "ref_at_pinn_peak": 1.7471608184260263,
+ "err_at_pinn_peak_pct": 1.6533412520166335,
+ "ref_peak_lam": 1.7654396276598248,
+ "ref_peak_delta": 5.0,
+ "err_vs_ref_peak_pct": 0.6008543792784149,
+ "path_rmse": 0.04159075108718684,
+ "path_rmse_pct_of_peak": 2.3558297001816704
+}
