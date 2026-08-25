@@ -106,9 +106,9 @@ def draw_backbones(ax, inset=False):
                 color=cfg["colour"], alpha=0.40, zorder=2)
         ax.plot(m[:, 0], m[:, 1], ls="none", marker=cfg["mk"], ms=5.0,
                 color=cfg["colour"], mfc="white", mew=1.4, zorder=5,
-                label=None if inset else f"{u} measured")
+                label=None)
         ax.plot(d, V, ls="-", color=cfg["colour"], lw=2.2, zorder=3,
-                label=None if inset else f"{u} reference")
+                label=None)
         # the located maxima, which is what the comparison is about
         k = int(np.argmax(V))
         km = int(np.argmax(m[:, 1]))
@@ -138,18 +138,37 @@ def main() -> None:
     if pc is not None:
         ax.plot(pc[0], pc[1], **F.style('anchored', marker='none',
                                         label=False),
-                lw=2.0, zorder=4, label="VK1 arc-length PINN")
+                lw=2.0, zorder=4, label=None)
 
     ax.set_ylabel(r"horizontal force $V$  (kN)")
     ax.set_xlabel(r"deflection at $h_{\mathrm{eff}}$  (mm)")
     ax.set_xlim(0, 65)
     ax.set_ylim(0, 1010)
     F.clean(ax)
-    # Both legend and inset go in the band below the backbones, which is
-    # empty; upper left would sit inside the zoom rectangle.
-    ax.legend(loc="lower left", fontsize=F.FS_ANNOT, ncol=1,
-              columnspacing=1.0, handlelength=1.9, borderaxespad=0.4,
-              labelspacing=0.30, frameon=False)
+    # Colour identifies the specimen and is written directly on the
+    # curves; the legend then carries only the three STROKES (source),
+    # in neutral grey, and fits the empty upper-left corner without
+    # touching a line.
+    ax.text(24.0, 915, "VK3", color=F.ORANGE, fontsize=F.FS_LABEL,
+            fontweight="bold", ha="center", va="center")
+    ax.text(24.0, 612, "VK1", color=F.BLACK, fontsize=F.FS_LABEL,
+            fontweight="bold", ha="center", va="center")
+    from matplotlib.lines import Line2D
+    proxies = [
+        Line2D([], [], ls="none", marker="o", ms=5.0, mfc="white",
+               mew=1.4, color="0.35", label="measured backbone"),
+        Line2D([], [], ls="-", lw=2.2, color="0.35", label="reference"),
+        Line2D([], [], ls=(0, (6, 2, 1.4, 2)), lw=2.0, color="0.35",
+               label="arc-length PINN"),
+    ]
+    # Upper right is the one in-axes region with no content: the
+    # curves end by 45 mm below 880 kN and the VK3 star tops out at
+    # 885 kN on the left half.
+    ax.set_ylim(0, 1075)
+    ax.legend(handles=proxies, loc="upper right", ncol=1,
+              fontsize=F.FS_ANNOT, handlelength=1.8,
+              handletextpad=0.5, labelspacing=0.32,
+              borderaxespad=0.5, frameon=False)
 
     # Inset: deviation from the measured backbone. A zoom on the peak
     # would show the agreement there and conceal the early branch, which

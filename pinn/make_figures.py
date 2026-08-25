@@ -144,38 +144,56 @@ def fig_equilibrium_path():
             **F.style('crackband', marker='none', label=False), lw=1.8,
             label='consistent-tangent follower (independent)')
 
-    # The un-anchored network: drawn subdued and annotated as
-    # inadmissible ON the curve, so a skimming reader cannot take its
-    # level for the result. The fold mechanism, not the level, is the
-    # claim.
+    # The un-anchored network: subdued, with direction arrows along the
+    # trace so the traversal (the claim) is visible in the ink, and a
+    # short curved tag for the level (not the claim).
     ax.plot(delta, lam, color=F.GREEN, ls=(0, (4, 2)), lw=1.8,
             alpha=0.55, label='arc-length PINN, un-anchored')
     ax.plot(delta[i_peak], lam[i_peak], "*", color=F.GREEN, ms=10,
             mec="white", mew=0.6, zorder=6, alpha=0.75)
-    k_ann = int(0.62 * len(delta))
-    ax.annotate("inadmissible: violates the traction-free\n"
-                "boundary (Sec. 6); the claim is the fold, not the level",
-                xy=(delta[k_ann], lam[k_ann]),
-                xytext=(delta[k_ann] + 0.3, lam[k_ann] - 0.72),
-                fontsize=F.FS_ANNOT, color="0.35",
-                arrowprops=dict(arrowstyle="-", color="0.5", lw=0.8))
+    # s-direction arrows: three small heads along the curve, the last
+    # one past the fold, so "folds through" is drawn, not asserted
+    from matplotlib.patches import FancyArrowPatch
+    for frac in (0.30, 0.62, 0.93):
+        k = int(frac * (len(delta) - 5))
+        ax.add_patch(FancyArrowPatch(
+            (delta[k], lam[k]), (delta[k + 4], lam[k + 4]),
+            arrowstyle='-|>', mutation_scale=12, color=F.GREEN,
+            alpha=0.85, lw=0, zorder=5))
+    k_tag = int(0.66 * len(delta))
+    ax.annotate("level inadmissible (boundary audit);\nthe claim is the fold",
+                xy=(delta[k_tag], lam[k_tag]),
+                xytext=(delta[k_tag] - 1.15, lam[k_tag] + 0.16),
+                fontsize=F.FS_ANNOT, color="0.35", ha="right",
+                va="bottom",
+                arrowprops=dict(arrowstyle="-", color="0.5", lw=0.8,
+                                connectionstyle="arc3,rad=0.15",
+                                shrinkA=2, shrinkB=7))
 
-    # the closed-form admissibility bound
-    for lb, txt in ((1.35, r"tie at yield  $\lambda = 1.35$"),
-                    (1.48, r"tie at ultimate  $\lambda = 1.48$")):
-        ax.axhline(lb, color='0.45', lw=0.9, ls='--', alpha=0.9, zorder=2)
-    ax.text(delta.max() * 0.99, 1.48 * 1.02,
-            r"closed-form bounds: tie at yield $1.35$, at ultimate $1.48$",
-            ha='right', va='bottom', fontsize=F.FS_ANNOT, color='0.45')
+    # The closed-form tie band: the admissible ceiling drawn as a band
+    # from yield to ultimate, with the reference star landing inside it.
+    ax.axhspan(1.35, 1.48, color=F.ORANGE, alpha=0.13, lw=0, zorder=1)
+    for lb in (1.35, 1.48):
+        ax.axhline(lb, color='0.5', lw=0.8, ls='--', alpha=0.8, zorder=2)
+    ax.text(9.95, 1.52, "closed-form tie band, yield 1.35 to "
+            "ultimate 1.48;\nthe reference peaks inside it",
+            fontsize=F.FS_ANNOT, color="0.38", ha="right", va="bottom",
+            linespacing=1.3)
 
-    # placed right of the elastic warm-start line, which is steep and
-    # otherwise runs through a top-left note
-    F.note(ax, 0.30, 0.97,
-           rf"PINN peak $\lambda = {lam[i_peak]:.2f}$"
-           rf" at $\delta = {delta[i_peak]:.1f}$ mm" + "\n"
-           rf"reference peak $\lambda = {ref_pk_lam:.3f}$"
-           rf" at $\delta = {ref_pk_delta:.2f}$ mm",
-           ha="left", va="top", color="0.35")
+    # peaks annotated at their stars, not in a corner box
+    ax.annotate(rf"$\lambda = {lam[i_peak]:.2f}$ at {delta[i_peak]:.1f} mm",
+                xy=(delta[i_peak], lam[i_peak]),
+                xytext=(delta[i_peak] - 0.4, lam[i_peak] + 0.13),
+                fontsize=F.FS_ANNOT, color=F.GREEN, ha="right",
+                fontweight="bold")
+    ax.annotate(rf"reference $\lambda = {ref_pk_lam:.3f}$ at "
+                rf"{ref_pk_delta:.2f} mm",
+                xy=(ref_pk_delta, ref_pk_lam),
+                xytext=(ref_pk_delta + 0.45, ref_pk_lam - 0.38),
+                fontsize=F.FS_ANNOT, color="black", ha="left",
+                fontweight="bold",
+                arrowprops=dict(arrowstyle="-", color="0.5", lw=0.8,
+                                shrinkA=2, shrinkB=5))
 
     ax.set_xlabel(r"loaded-patch deflection $\delta$  (mm)")
     ax.set_ylabel(r"load factor $\lambda$")
