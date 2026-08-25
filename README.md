@@ -55,13 +55,20 @@ SciPy.
 
 ## Measured data
 
-No measured data is distributed here. The wall-pier backbones used in the
-experimental comparison are digitised from a figure in Bimschas (2010),
-belong to their original author, and are neither included nor extractable
-from this repository; `plot_vk_combined.py` expects them as
-`vk1_backbone.csv` and `vk3_backbone.csv` and will not run without them.
-The deep-beam capacities are from Li et al. (2022), *Materials* 15, 6017,
-which is open access.
+This repository contains the author's own code and generated data. The
+experimental measurements used for comparison are available in the
+published sources that report them:
+
+- Wall piers: Bimschas, M. (2010). *Displacement-Based Seismic Assessment
+  of Existing Bridges in Regions of Moderate Seismicity.* ETH Zurich.
+- Deep beams: Li, S., Wu, Z., Zhang, J. and Xie, W. (2022). Experimental
+  study and calculation methods of shear capacity for high-strength
+  reinforced concrete full-scale deep beams. *Materials* 15, 6017.
+  https://doi.org/10.3390/ma15176017
+
+`plot_vk_combined.py` reads the wall-pier backbones as
+`vk1_backbone.csv` and `vk3_backbone.csv`, which should be obtained from
+the source above.
 
 ## Citation
 
