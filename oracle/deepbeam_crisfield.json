@@ -1,0 +1,484 @@
+{
+  "curve": [
+    {
+      "delta": 0.1009399133063296,
+      "lam": 0.08514257577889411,
+      "newton_iters": 13,
+      "converged": true
+    },
+    {
+      "delta": 0.20222259616089494,
+      "lam": 0.17005538596019093,
+      "newton_iters": 5,
+      "converged": true
+    },
+    {
+      "delta": 0.30386400268915137,
+      "lam": 0.25472464466521344,
+      "newton_iters": 4,
+      "converged": true
+    },
+    {
+      "delta": 0.4058780845905928,
+      "lam": 0.3391319103987259,
+      "newton_iters": 4,
+      "converged": true
+    },
+    {
+      "delta": 0.5082845027170546,
+      "lam": 0.4232591011771813,
+      "newton_iters": 4,
+      "converged": true
+    },
+    {
+      "delta": 0.6112964739329224,
+      "lam": 0.5071634138446476,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 0.715622916649546,
+      "lam": 0.5909515552421787,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 0.8217914467397941,
+      "lam": 0.6741987808775208,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 0.9296461364737512,
+      "lam": 0.7565215207418422,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 1.0391321072116468,
+      "lam": 0.837888595326742,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 1.1503944956089698,
+      "lam": 0.9181923838156313,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 1.263520992999743,
+      "lam": 0.9972620521488675,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 1.3786312663770606,
+      "lam": 1.074580519425274,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 1.4949563763235645,
+      "lam": 1.1479906651305203,
+      "newton_iters": 7,
+      "converged": true
+    },
+    {
+      "delta": 1.607349048206658,
+      "lam": 1.2091796435007534,
+      "newton_iters": 8,
+      "converged": true
+    },
+    {
+      "delta": 1.7062853796113369,
+      "lam": 1.241779348580982,
+      "newton_iters": 7,
+      "converged": true
+    },
+    {
+      "delta": 1.7953188492101035,
+      "lam": 1.2556063619414437,
+      "newton_iters": 4,
+      "converged": true
+    },
+    {
+      "delta": 1.8827974478260419,
+      "lam": 1.2660762398004815,
+      "newton_iters": 4,
+      "converged": true
+    },
+    {
+      "delta": 1.969789256138799,
+      "lam": 1.2741590653274553,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 2.0558130652256232,
+      "lam": 1.280538749012181,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 2.1409510223855515,
+      "lam": 1.2858883949044007,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.225396212252401,
+      "lam": 1.2905573472040153,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 2.3093279364755666,
+      "lam": 1.2947198212261262,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 2.3924081615156454,
+      "lam": 1.298232184568808,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.47562463641541,
+      "lam": 1.3015168814755425,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.5585017188886416,
+      "lam": 1.3043826480547633,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 2.641409348698294,
+      "lam": 1.307020406943625,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.7242923403383363,
+      "lam": 1.3095009240288082,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.807037578642352,
+      "lam": 1.311846425833338,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.8891770098641696,
+      "lam": 1.3140192890214635,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 2.9711498852280713,
+      "lam": 1.3161271259337974,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 3.0530281247210325,
+      "lam": 1.3181509165977587,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.1347268236910795,
+      "lam": 1.3200445598239732,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.2163663009301393,
+      "lam": 1.3218185349330158,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 3.298068596148217,
+      "lam": 1.323532911415796,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.3793494862689464,
+      "lam": 1.3251373075162136,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.4607389934459007,
+      "lam": 1.3266915495974065,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 3.5421867388426094,
+      "lam": 1.3281974381844006,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.6236431895193975,
+      "lam": 1.3297020484692266,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 3.7052061111998045,
+      "lam": 1.33116290804332,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.7867573417539058,
+      "lam": 1.3326247364668415,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 3.868282431808919,
+      "lam": 1.3340284372433535,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 3.949315396183701,
+      "lam": 1.335358632056435,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.03034776821346,
+      "lam": 1.336667086727672,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.1113626712658204,
+      "lam": 1.3378988692576834,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.192357264737433,
+      "lam": 1.3390845600270633,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.273373582937902,
+      "lam": 1.3402570889763312,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 4.354376821151759,
+      "lam": 1.3413922901125255,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.43538554223735,
+      "lam": 1.3424999908998885,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.516401834375716,
+      "lam": 1.3435864293777333,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 4.597435294028811,
+      "lam": 1.3446318356200035,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.678519253457572,
+      "lam": 1.345665679926237,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 4.7597855775717175,
+      "lam": 1.3466633767799476,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.841039518404777,
+      "lam": 1.3476453423408914,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 4.922419497157678,
+      "lam": 1.34858012422613,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 5.003803160936602,
+      "lam": 1.34950529454075,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.085205599533253,
+      "lam": 1.3503923642631785,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 5.166607085303744,
+      "lam": 1.3512782061570368,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.2480395034150105,
+      "lam": 1.352150289703009,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.3294518321565505,
+      "lam": 1.3529389139130714,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 5.410757632856624,
+      "lam": 1.3537346793399652,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.492105041259206,
+      "lam": 1.3545284214988584,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.573453214727755,
+      "lam": 1.3553217006225693,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.654828340707896,
+      "lam": 1.3561124691456063,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 5.736182423939115,
+      "lam": 1.3569048266660018,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.817554214130462,
+      "lam": 1.357695284778561,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 5.897790112841514,
+      "lam": 1.357783566369712,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 5.9781296178157834,
+      "lam": 1.3578794673421124,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.0588576126423614,
+      "lam": 1.3581294011486795,
+      "newton_iters": 3,
+      "converged": true
+    },
+    {
+      "delta": 6.139797780170589,
+      "lam": 1.3584940380128248,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.220610551473132,
+      "lam": 1.3588857343202074,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.301451190727102,
+      "lam": 1.3592901300847005,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.382311463695805,
+      "lam": 1.3597011735918705,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 6.463215947046066,
+      "lam": 1.360129379003625,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.54412990615964,
+      "lam": 1.3605566353915226,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 6.625078374812395,
+      "lam": 1.3609895304652804,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 6.706108346234251,
+      "lam": 1.361431613177179,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.787088046875867,
+      "lam": 1.3618723824483139,
+      "newton_iters": 2,
+      "converged": true
+    },
+    {
+      "delta": 6.868078796220684,
+      "lam": 1.362314801284852,
+      "newton_iters": 1,
+      "converged": true
+    },
+    {
+      "delta": 6.9490704890695145,
+      "lam": 1.3627606842674456,
+      "newton_iters": 1,
+      "converged": true
+    }
+  ]
+}
